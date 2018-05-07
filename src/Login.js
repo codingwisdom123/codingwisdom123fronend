@@ -25,6 +25,7 @@ import Drawer from 'rc-drawer-menu';
 import { Link } from 'react-router-dom'
 
 
+
 class Login extends Component {
   constructor(props) {
       super(props);
@@ -39,7 +40,7 @@ class Login extends Component {
   }
   render() {
     return (
-      <Center style={{height: 700, backgroundColor: 'black'}}>
+      <Center style={{height: 700, backgroundColor: 'white'}}>
         <div style={{color: 'white'}}><Link to='/Dashboard'>#Login</Link></div>
       </Center>
     );

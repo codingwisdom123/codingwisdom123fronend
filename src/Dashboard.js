@@ -91,21 +91,6 @@ class Dashboard extends Component {
       <Center style={{height: 700, backgroundColor: 'black'}}>
         <div style={{color: 'white'}}>#Dashboard</div>
       </Center>
-      <StickyFooter
-          bottomThreshold={50}
-          normalStyles={{
-          backgroundColor: "#999999",
-          padding: "2rem",
-          width: "100%"
-          }}
-          stickyStyles={{
-          backgroundColor: "rgba(255,255,255,.8)",
-          padding: "2rem",
-          width: "100%"
-          }}
-      >
-          #Footer
-      </StickyFooter>
     </div>
     );
   }
