@@ -12,14 +12,70 @@ import StickyHeader from 'react-sticky-header';
 import { StickyTable, Cell } from 'react-sticky-table';
 import 'react-sticky-table/dist/react-sticky-table.css';
 
+import { slide as Menu } from 'react-burger-menu'
+
+import Modal from 'react-modal';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
+
+
 import Sticky from 'react-stickynode';
+import StickyBox from "react-sticky-box";
+import Drawer from 'rc-drawer-menu';
 
 class App extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+          isPaneOpen: false,
+          isPaneOpenLeft: false
+      };
+  }
+
+  componentDidMount() {
+      Modal.setAppElement(this.el);
+  }
   render() {
     return (
     <div>
-      <Sticky top='#header' bottomBoundary='#content'>
-          <div style={{backgroundColor: "brown", color: "yellow", height: 30, padding: 25}}>#Header</div>
+      <div ref={ref => this.el = ref}>
+          <SlidingPane
+              className='some-custom-class'
+              overlayClassName='some-custom-overlay-class'
+              isOpen={ this.state.isPaneOpen }
+              title='#RIGHT'
+              width='200px'
+              onRequestClose={ () => {
+                  // triggered on "<" on left top click or on outside click
+                  this.setState({ isPaneOpen: false });
+              } }>
+              <div>#RIGHT</div>
+          </SlidingPane>
+          <SlidingPane
+              isOpen={ this.state.isPaneOpenLeft }
+              title='#LEFT'
+              from='left'
+              width='200px'
+              onRequestClose={ () => this.setState({ isPaneOpenLeft: false }) }>
+              <div>#LEFT</div>
+          </SlidingPane>
+      </div>
+      <Sticky top='#header' bottomBoundary='#content' style={{flexDirection: 'row'}}>
+        <div style={{backgroundColor: "brown", color: "yellow", height: 30, padding: 25, flexDirection: 'row', display: 'flex'}}>
+          #Header
+          <div
+            onClick={ () => this.setState({ isPaneOpenLeft: true})}
+            style={{marginLeft: 10}}
+            >
+            #LEFT_PANE
+          </div>
+          <div
+            onClick={() => this.setState({ isPaneOpen: true})}
+            style={{marginLeft: 10}}
+            >
+            #RIGHT_PANE
+          </div>
+        </div>
       </Sticky>
       <Center style={{height: 700, backgroundColor: 'black'}}>
         <div style={{color: 'white'}}>#Section1</div>
